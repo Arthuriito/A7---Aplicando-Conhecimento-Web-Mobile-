@@ -58,3 +58,7 @@ npm run start
 
 ### Valores para wasteType:
 - "plastic", "paper", "organic", "electronic", "glass", "metal"
+
+## Configuração do GitHub
+
+Repositório: https://github.com/Arthuriito/A7---Aplicando-Conhecimento-Web-Mobile-
