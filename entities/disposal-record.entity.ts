@@ -1,7 +1,7 @@
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn } from 'typeorm';
-import { DisposalPoint, WasteCategory } from './disposal-point.entity';
+import { DisposalPoint } from './disposal-point.entity';
 
-@Entity()
+@Entity('disposal_records')
 export class DisposalRecord {
   @PrimaryGeneratedColumn()
   id: number;
@@ -16,11 +16,8 @@ export class DisposalRecord {
   @Column()
   disposalPointId: number;
 
-  @Column({
-    type: 'text',
-    enum: WasteCategory
-  })
-  wasteType: WasteCategory;
+  @Column('text') // String simples
+  wasteType: string;
 
   @Column({ type: 'datetime', default: () => 'CURRENT_TIMESTAMP' })
   disposalDate: Date;
