@@ -1,8 +1,8 @@
-# A7 - Aplicando Conhecimento Web Mobile 🌱
+# A7 - Aplicando Conhecimento Web Mobile 
 
 API para gestão de descarte de resíduos - Projeto Extensionista alinhado ao ODS 12
 
-## 📋 Sobre o Projeto
+## Sobre o Projeto
 
 Esta API foi desenvolvida como parte do componente extensionista da disciplina, seguindo a Resolução nº 7/2018 do MEC e alinhada ao **Objetivo de Desenvolvimento Sustentável 12: "Consumo e Produção Responsáveis"**.
 
@@ -10,7 +10,7 @@ Esta API foi desenvolvida como parte do componente extensionista da disciplina, 
 **Atividade:** A7 - Aplicando Conhecimento  
 **Objetivo:** Desenvolver API com NestJS para gestão de descarte de resíduos
 
-## 🚀 Funcionalidades
+## Funcionalidades
 
 - ✅ Cadastro de pontos de descarte
 - ✅ Registro de descartes por usuários
@@ -25,7 +25,7 @@ Esta API foi desenvolvida como parte do componente extensionista da disciplina, 
 - SQLite
 - TypeScript
 
-## 📊 Endpoints Principais
+## Endpoints Principais
 
 ### Pontos de Descarte
 - `POST /disposal-points` - Cadastrar novo ponto
@@ -37,7 +37,7 @@ Esta API foi desenvolvida como parte do componente extensionista da disciplina, 
 - `GET /disposal-records` - Listar descartes (com filtros)
 - `GET /disposal-records/relatorio` - Dashboard estatístico
 
-## 🏃‍♂️ Como Executar
+## Como Executar
 
 ```bash
 # Instalar dependências
@@ -49,3 +49,12 @@ npm run start:dev
 # Produção
 npm run build
 npm run start
+
+## Como Usar
+
+### Valores para locationType:
+- "public" 
+- "private"
+
+### Valores para wasteType:
+- "plastic", "paper", "organic", "electronic", "glass", "metal"
