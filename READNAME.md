@@ -1,10 +1,14 @@
-# Waste Management API 🌱
+# A7 - Aplicando Conhecimento Web Mobile 🌱
 
 API para gestão de descarte de resíduos - Projeto Extensionista alinhado ao ODS 12
 
 ## 📋 Sobre o Projeto
 
 Esta API foi desenvolvida como parte do componente extensionista da disciplina, seguindo a Resolução nº 7/2018 do MEC e alinhada ao **Objetivo de Desenvolvimento Sustentável 12: "Consumo e Produção Responsáveis"**.
+
+**Disciplina:** Web Mobile  
+**Atividade:** A7 - Aplicando Conhecimento  
+**Objetivo:** Desenvolver API com NestJS para gestão de descarte de resíduos
 
 ## 🚀 Funcionalidades
 
