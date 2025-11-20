@@ -8,29 +8,10 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var __param = (this && this.__param) || function (paramIndex, decorator) {
-    return function (target, key) { decorator(target, key, paramIndex); }
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.AppController = void 0;
 const common_1 = require("@nestjs/common");
-const path_1 = require("path");
 let AppController = class AppController {
-    getHome(res) {
-        return res.sendFile((0, path_1.join)(__dirname, '../../public/index.html'));
-    }
-    getCadastroPonto(res) {
-        return res.sendFile((0, path_1.join)(__dirname, '../../public/cadastro-ponto.html'));
-    }
-    getRegistroDescarte(res) {
-        return res.sendFile((0, path_1.join)(__dirname, '../../public/registro-descarte.html'));
-    }
-    getConsultaHistorico(res) {
-        return res.sendFile((0, path_1.join)(__dirname, '../../public/consulta-historico.html'));
-    }
-    getRelatorios(res) {
-        return res.sendFile((0, path_1.join)(__dirname, '../../public/relatorios.html'));
-    }
     getApiInfo() {
         return {
             message: '🚀 API de Gestão de Resíduos - Projeto Extensionista ODS 12',
@@ -47,41 +28,6 @@ let AppController = class AppController {
 exports.AppController = AppController;
 __decorate([
     (0, common_1.Get)(),
-    __param(0, (0, common_1.Res)()),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object]),
-    __metadata("design:returntype", void 0)
-], AppController.prototype, "getHome", null);
-__decorate([
-    (0, common_1.Get)('cadastro-ponto'),
-    __param(0, (0, common_1.Res)()),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object]),
-    __metadata("design:returntype", void 0)
-], AppController.prototype, "getCadastroPonto", null);
-__decorate([
-    (0, common_1.Get)('registro-descarte'),
-    __param(0, (0, common_1.Res)()),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object]),
-    __metadata("design:returntype", void 0)
-], AppController.prototype, "getRegistroDescarte", null);
-__decorate([
-    (0, common_1.Get)('consulta-historico'),
-    __param(0, (0, common_1.Res)()),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object]),
-    __metadata("design:returntype", void 0)
-], AppController.prototype, "getConsultaHistorico", null);
-__decorate([
-    (0, common_1.Get)('relatorios'),
-    __param(0, (0, common_1.Res)()),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object]),
-    __metadata("design:returntype", void 0)
-], AppController.prototype, "getRelatorios", null);
-__decorate([
-    (0, common_1.Get)('api'),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", void 0)

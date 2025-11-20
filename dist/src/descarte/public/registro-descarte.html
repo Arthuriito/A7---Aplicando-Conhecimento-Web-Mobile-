@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registrar Descarte</title>
+</head>
+<body>
+    <h1>🗑️ Registrar Descarte</h1>
+    <a href="index.html">← Voltar para Início</a>
+
+    <form id="form-descarte">
+        <div>
+            <label for="userName">Nome do Usuário *</label>
+            <input type="text" id="userName" required>
+        </div>
+
+        <div>
+            <label for="disposalPointId">Ponto de Descarte *</label>
+            <select id="disposalPointId" required>
+                <option value="">Carregando pontos...</option>
+            </select>
+        </div>
+
+        <div>
+            <label for="wasteType">Tipo de Resíduo *</label>
+            <select id="wasteType" required>
+                <option value="">Selecione...</option>
+                <option value="plastic">Plástico</option>
+                <option value="paper">Papel</option>
+                <option value="organic">Orgânico</option>
+                <option value="electronic">Eletrônico</option>
+                <option value="glass">Vidro</option>
+                <option value="metal">Metal</option>
+            </select>
+        </div>
+
+        <div>
+            <label for="disposalDate">Data do Descarte *</label>
+            <input type="date" id="disposalDate" required>
+        </div>
+
+        <button type="submit">Registrar Descarte</button>
+    </form>
+
+    <div id="mensagem"></div>
+
+    <script src="app.js"></script>
+</body>
+</html>

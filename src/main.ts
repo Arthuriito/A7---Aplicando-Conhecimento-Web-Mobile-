@@ -6,17 +6,17 @@ import { AppModule } from './app.module';
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
   
-  // Servir arquivos estáticos e permitir acesso direto aos HTML
-  app.useStaticAssets(join(__dirname, '..', 'public'), {
-    index: false,
-    redirect: false
-  });
+  // Servir arquivos estáticos do front-end
+  const frontendPath = join(__dirname, 'descarte', 'public');
+  app.useStaticAssets(frontendPath);
+  
+  // Habilitar CORS
+  app.enableCors();
   
   await app.listen(3000);
-  console.log('🚀 API rodando em http://localhost:3000');
-  console.log('🌐 Front-end disponível em http://localhost:3000');
-  console.log('📄 Páginas disponíveis:');
-  console.log('   • http://localhost:3000/');
+  console.log('🚀 API e Front-end rodando em http://localhost:3000');
+  console.log('📄 Front-end disponível em:');
+  console.log('   • http://localhost:3000/index.html');
   console.log('   • http://localhost:3000/cadastro-ponto.html');
   console.log('   • http://localhost:3000/registro-descarte.html');
   console.log('   • http://localhost:3000/consulta-historico.html');

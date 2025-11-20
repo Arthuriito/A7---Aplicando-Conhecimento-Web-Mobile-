@@ -1,28 +1,19 @@
 const API_BASE = 'http://localhost:3000';
 
-// Tradutores para exibição
-const tradutores = {
-    locationType: {
-        'public': 'Público',
-        'private': 'Privado'
-    },
-    wasteType: {
-        'plastic': 'Plástico',
-        'paper': 'Papel',
-        'organic': 'Orgânico',
-        'electronic': 'Eletrônico',
-        'glass': 'Vidro',
-        'metal': 'Metal'
-    }
-};
-
-// Utilidades
+// ========== FUNÇÕES UTILITÁRIAS ==========
 function mostrarMensagem(mensagem, tipo = 'sucesso') {
     const div = document.getElementById('mensagem');
     if (div) {
         div.textContent = mensagem;
-        div.className = `mensagem ${tipo}`;
-        setTimeout(() => div.style.display = 'none', 5000);
+        div.style.color = tipo === 'erro' ? 'red' : 'green';
+        div.style.padding = '10px';
+        div.style.margin = '10px 0';
+        div.style.border = tipo === 'erro' ? '1px solid red' : '1px solid green';
+        
+        setTimeout(() => {
+            div.textContent = '';
+            div.style.border = 'none';
+        }, 5000);
     }
 }
 
@@ -30,24 +21,46 @@ function formatarData(data) {
     return new Date(data).toLocaleDateString('pt-BR');
 }
 
-// 1. Cadastro de Ponto de Descarte
+// Tradutores para exibição
+const tradutores = {
+    wasteType: {
+        'plastic': 'Plástico',
+        'paper': 'Papel', 
+        'organic': 'Orgânico',
+        'electronic': 'Eletrônico',
+        'glass': 'Vidro',
+        'metal': 'Metal'
+    }
+};
+
+// ========== 1. CADASTRO DE PONTO DE DESCARTE ==========
 if (document.getElementById('form-ponto')) {
     const form = document.getElementById('form-ponto');
     
     form.addEventListener('submit', async (e) => {
         e.preventDefault();
         
-        const formData = new FormData(form);
-        const categorias = Array.from(form.querySelectorAll('input[name="categorias"]:checked'))
-            .map(cb => cb.value);
+        // Coletar categorias selecionadas
+        const categorias = [];
+        if (document.getElementById('plastic').checked) categorias.push('plastic');
+        if (document.getElementById('paper').checked) categorias.push('paper');
+        if (document.getElementById('organic').checked) categorias.push('organic');
+        if (document.getElementById('electronic').checked) categorias.push('electronic');
+        if (document.getElementById('glass').checked) categorias.push('glass');
+        if (document.getElementById('metal').checked) categorias.push('metal');
+        
+        if (categorias.length === 0) {
+            mostrarMensagem('Selecione pelo menos uma categoria de resíduo!', 'erro');
+            return;
+        }
         
         const dados = {
-            name: formData.get('nome'),
-            neighborhood: formData.get('bairro'),
-            locationType: formData.get('tipoLocal'),
+            name: document.getElementById('nome').value,
+            neighborhood: document.getElementById('bairro').value,
+            locationType: document.getElementById('tipoLocal').value,
             acceptedCategories: categorias,
-            latitude: parseFloat(formData.get('latitude')),
-            longitude: parseFloat(formData.get('longitude'))
+            latitude: parseFloat(document.getElementById('latitude').value),
+            longitude: parseFloat(document.getElementById('longitude').value)
         };
         
         try {
@@ -60,24 +73,24 @@ if (document.getElementById('form-ponto')) {
             });
             
             if (response.ok) {
-                mostrarMensagem('Ponto de descarte cadastrado com sucesso!', 'sucesso');
+                mostrarMensagem('✅ Ponto de descarte cadastrado com sucesso!');
                 form.reset();
             } else {
                 const erro = await response.json();
-                mostrarMensagem(`Erro: ${erro.message}`, 'erro');
+                mostrarMensagem(`❌ Erro: ${erro.message}`, 'erro');
             }
         } catch (error) {
-            mostrarMensagem('Erro ao conectar com a API', 'erro');
+            mostrarMensagem('❌ Erro ao conectar com a API. Verifique se o servidor está rodando.', 'erro');
         }
     });
 }
 
-// 2. Registro de Descarte
+// ========== 2. REGISTRO DE DESCARTE ==========
 if (document.getElementById('form-descarte')) {
     const form = document.getElementById('form-descarte');
     const selectPonto = document.getElementById('disposalPointId');
     
-    // Carregar pontos de descarte
+    // Carregar pontos de descarte para o dropdown
     async function carregarPontosDescarte() {
         try {
             const response = await fetch(`${API_BASE}/disposal-points`);
@@ -101,12 +114,11 @@ if (document.getElementById('form-descarte')) {
     form.addEventListener('submit', async (e) => {
         e.preventDefault();
         
-        const formData = new FormData(form);
         const dados = {
-            userName: formData.get('userName'),
-            disposalPointId: parseInt(formData.get('disposalPointId')),
-            wasteType: formData.get('wasteType'),
-            disposalDate: formData.get('disposalDate')
+            userName: document.getElementById('userName').value,
+            disposalPointId: parseInt(document.getElementById('disposalPointId').value),
+            wasteType: document.getElementById('wasteType').value,
+            disposalDate: document.getElementById('disposalDate').value
         };
         
         try {
@@ -119,24 +131,23 @@ if (document.getElementById('form-descarte')) {
             });
             
             if (response.ok) {
-                mostrarMensagem('Descarte registrado com sucesso!', 'sucesso');
+                mostrarMensagem('✅ Descarte registrado com sucesso!');
                 form.reset();
                 document.getElementById('disposalDate').valueAsDate = new Date();
             } else {
                 const erro = await response.json();
-                mostrarMensagem(`Erro: ${erro.message}`, 'erro');
+                mostrarMensagem(`❌ Erro: ${erro.message}`, 'erro');
             }
         } catch (error) {
-            mostrarMensagem('Erro ao conectar com a API', 'erro');
+            mostrarMensagem('❌ Erro ao conectar com a API.', 'erro');
         }
     });
     
     carregarPontosDescarte();
 }
 
-// 3. Consulta de Histórico
+// ========== 3. CONSULTA DE HISTÓRICO ==========
 if (document.getElementById('form-filtros')) {
-    const formFiltros = document.getElementById('form-filtros');
     const btnFiltrar = document.getElementById('btn-filtrar');
     const btnLimpar = document.getElementById('btn-limpar');
     const tbody = document.getElementById('tbody-historico');
@@ -149,6 +160,7 @@ if (document.getElementById('form-filtros')) {
             const response = await fetch(`${API_BASE}/disposal-points`);
             const pontos = await response.json();
             
+            selectPonto.innerHTML = '<option value="">Todos</option>';
             pontos.forEach(ponto => {
                 const option = document.createElement('option');
                 option.value = ponto.id;
@@ -165,12 +177,19 @@ if (document.getElementById('form-filtros')) {
         loading.style.display = 'block';
         tbody.innerHTML = '';
         
-        const formData = new FormData(formFiltros);
         const params = new URLSearchParams();
         
-        for (const [key, value] of formData.entries()) {
-            if (value) params.append(key, value);
-        }
+        const usuario = document.getElementById('filtroUsuario').value;
+        const residuo = document.getElementById('filtroResiduo').value;
+        const ponto = document.getElementById('filtroPonto').value;
+        const dataInicio = document.getElementById('dataInicio').value;
+        const dataFim = document.getElementById('dataFim').value;
+        
+        if (usuario) params.append('userName', usuario);
+        if (residuo) params.append('wasteType', residuo);
+        if (ponto) params.append('disposalPointId', ponto);
+        if (dataInicio) params.append('startDate', dataInicio);
+        if (dataFim) params.append('endDate', dataFim);
         
         try {
             const response = await fetch(`${API_BASE}/disposal-records?${params}`);
@@ -198,7 +217,7 @@ if (document.getElementById('form-filtros')) {
     
     // Limpar filtros
     function limparFiltros() {
-        formFiltros.reset();
+        document.getElementById('form-filtros').reset();
         aplicarFiltros();
     }
     
@@ -210,7 +229,7 @@ if (document.getElementById('form-filtros')) {
     aplicarFiltros();
 }
 
-// 4. Relatórios
+// ========== 4. RELATÓRIOS ==========
 if (document.getElementById('btn-atualizar')) {
     const btnAtualizar = document.getElementById('btn-atualizar');
     
@@ -219,7 +238,7 @@ if (document.getElementById('btn-atualizar')) {
             const response = await fetch(`${API_BASE}/disposal-records/relatorio`);
             const relatorio = await response.json();
             
-            // Atualizar cards
+            // Atualizar todos os campos do relatório
             document.getElementById('local-ativo').textContent = relatorio.mostActiveLocation || 'Nenhum';
             document.getElementById('residuo-frequente').textContent = 
                 tradutores.wasteType[relatorio.mostFrequentWaste] || relatorio.mostFrequentWaste || 'Nenhum';
@@ -231,14 +250,14 @@ if (document.getElementById('btn-atualizar')) {
             document.getElementById('variacao-mensal').textContent = 
                 `${variacao > 0 ? '+' : ''}${variacao.toFixed(1)}%`;
             document.getElementById('variacao-mensal').style.color = 
-                variacao > 0 ? '#4CAF50' : variacao < 0 ? '#f44336' : '#666';
+                variacao > 0 ? 'green' : variacao < 0 ? 'red' : 'black';
             
             // Atualizar timestamp
             document.getElementById('ultima-atualizacao').textContent = 
                 `Última atualização: ${new Date().toLocaleTimeString('pt-BR')}`;
                 
         } catch (error) {
-            mostrarMensagem('Erro ao carregar relatórios', 'erro');
+            alert('Erro ao carregar relatórios. Verifique se a API está rodando.');
         }
     }
     
@@ -246,8 +265,8 @@ if (document.getElementById('btn-atualizar')) {
     carregarRelatorios();
 }
 
-// 5. Página Inicial - Estatísticas
-if (document.getElementById('total-pontos')) {
+// ========== 5. PÁGINA INICIAL - ESTATÍSTICAS ==========
+if (document.getElementById('total-pontos') && !document.getElementById('btn-atualizar')) {
     async function carregarEstatisticasInicio() {
         try {
             const [pontosResponse, relatorioResponse] = await Promise.all([
@@ -274,13 +293,4 @@ if (document.getElementById('total-pontos')) {
     carregarEstatisticasInicio();
 }
 
-// Configuração do MongoDB (para referência)
-const mongoConfig = {
-    url: 'mongodb://localhost:27017/waste_management',
-    options: {
-        useNewUrlParser: true,
-        useUnifiedTopology: true
-    }
-};
-
-console.log('Front-end do Sistema de Gestão de Resíduos carregado!');
+console.log('✅ Front-end do Sistema de Gestão de Resíduos carregado!');

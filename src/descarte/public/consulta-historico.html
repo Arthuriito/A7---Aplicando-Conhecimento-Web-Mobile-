@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consultar Histórico de Descartes</title>
+</head>
+<body>
+    <h1>📊 Consultar Histórico de Descartes</h1>
+    <a href="index.html">← Voltar para Início</a>
+
+    <div>
+        <h3>Filtros:</h3>
+        <form id="form-filtros">
+            <div>
+                <label for="filtroUsuario">Nome do Usuário:</label>
+                <input type="text" id="filtroUsuario">
+            </div>
+
+            <div>
+                <label for="filtroResiduo">Tipo de Resíduo:</label>
+                <select id="filtroResiduo">
+                    <option value="">Todos</option>
+                    <option value="plastic">Plástico</option>
+                    <option value="paper">Papel</option>
+                    <option value="organic">Orgânico</option>
+                    <option value="electronic">Eletrônico</option>
+                    <option value="glass">Vidro</option>
+                    <option value="metal">Metal</option>
+                </select>
+            </div>
+
+            <div>
+                <label for="filtroPonto">Ponto de Descarte:</label>
+                <select id="filtroPonto">
+                    <option value="">Todos</option>
+                </select>
+            </div>
+
+            <div>
+                <label for="dataInicio">Data Início:</label>
+                <input type="date" id="dataInicio">
+            </div>
+
+            <div>
+                <label for="dataFim">Data Fim:</label>
+                <input type="date" id="dataFim">
+            </div>
+
+            <button type="button" id="btn-filtrar">Aplicar Filtros</button>
+            <button type="button" id="btn-limpar">Limpar Filtros</button>
+        </form>
+    </div>
+
+    <div>
+        <h3>Resultados:</h3>
+        <div id="loading" style="display: none;">Carregando...</div>
+        <div id="resultados">
+            <table border="1" style="width: 100%;">
+                <thead>
+                    <tr>
+                        <th>Data</th>
+                        <th>Usuário</th>
+                        <th>Tipo de Resíduo</th>
+                        <th>Local</th>
+                        <th>Bairro</th>
+                    </tr>
+                </thead>
+                <tbody id="tbody-historico">
+                    <!-- Dados serão carregados aqui -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

@@ -1,36 +1,8 @@
-import { Controller, Get, Res, Param } from '@nestjs/common';
-import { Response } from 'express';
-import { join } from 'path';
+import { Controller, Get } from '@nestjs/common';
 
 @Controller()
 export class AppController {
-  
   @Get()
-  getHome(@Res() res: Response) {
-    return res.sendFile(join(__dirname, '../../public/index.html'));
-  }
-
-  @Get('cadastro-ponto')
-  getCadastroPonto(@Res() res: Response) {
-    return res.sendFile(join(__dirname, '../../public/cadastro-ponto.html'));
-  }
-
-  @Get('registro-descarte') 
-  getRegistroDescarte(@Res() res: Response) {
-    return res.sendFile(join(__dirname, '../../public/registro-descarte.html'));
-  }
-
-  @Get('consulta-historico')
-  getConsultaHistorico(@Res() res: Response) {
-    return res.sendFile(join(__dirname, '../../public/consulta-historico.html'));
-  }
-
-  @Get('relatorios')
-  getRelatorios(@Res() res: Response) {
-    return res.sendFile(join(__dirname, '../../public/relatorios.html'));
-  }
-
-  @Get('api')
   getApiInfo() {
     return {
       message: '🚀 API de Gestão de Resíduos - Projeto Extensionista ODS 12',
