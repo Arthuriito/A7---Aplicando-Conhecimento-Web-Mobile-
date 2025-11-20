@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastrar Ponto de Descarte</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📍 Cadastrar Ponto de Descarte</h1>
+<a href="/" class="back-btn">← Voltar</a>        </header>
+
+        <form id="form-ponto" class="form-container">
+            <div class="form-group">
+                <label for="nome">Nome do Local *</label>
+                <input type="text" id="nome" name="nome" required>
+            </div>
+
+            <div class="form-group">
+                <label for="bairro">Bairro *</label>
+                <input type="text" id="bairro" name="bairro" required>
+            </div>
+
+            <div class="form-group">
+                <label for="tipoLocal">Tipo de Local *</label>
+                <select id="tipoLocal" name="tipoLocal" required>
+                    <option value="">Selecione...</option>
+                    <option value="public">Público</option>
+                    <option value="private">Privado</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Categorias de Resíduos Aceitos *</label>
+                <div class="checkbox-group">
+                    <label class="checkbox">
+                        <input type="checkbox" name="categorias" value="plastic">
+                        <span>Plástico</span>
+                    </label>
+                    <label class="checkbox">
+                        <input type="checkbox" name="categorias" value="paper">
+                        <span>Papel</span>
+                    </label>
+                    <label class="checkbox">
+                        <input type="checkbox" name="categorias" value="organic">
+                        <span>Orgânico</span>
+                    </label>
+                    <label class="checkbox">
+                        <input type="checkbox" name="categorias" value="electronic">
+                        <span>Eletrônico</span>
+                    </label>
+                    <label class="checkbox">
+                        <input type="checkbox" name="categorias" value="glass">
+                        <span>Vidro</span>
+                    </label>
+                    <label class="checkbox">
+                        <input type="checkbox" name="categorias" value="metal">
+                        <span>Metal</span>
+                    </label>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="latitude">Latitude *</label>
+                    <input type="number" id="latitude" name="latitude" step="any" required>
+                </div>
+                <div class="form-group">
+                    <label for="longitude">Longitude *</label>
+                    <input type="number" id="longitude" name="longitude" step="any" required>
+                </div>
+            </div>
+
+            <button type="submit" class="btn-primary">Cadastrar Ponto</button>
+        </form>
+
+        <div id="mensagem" class="mensagem"></div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

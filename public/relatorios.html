@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Relatórios</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📈 Relatórios Estatísticos</h1>
+<a href="/" class="back-btn">← Voltar</a>        </header>
+
+        <div class="relatorios-container">
+            <div class="relatorio-header">
+                <button id="btn-atualizar" class="btn-primary">🔄 Atualizar Dados</button>
+                <span id="ultima-atualizacao"></span>
+            </div>
+
+            <div class="cards-relatorios">
+                <div class="card-relatorio">
+                    <div class="card-icon">🏆</div>
+                    <h3>Local Mais Ativo</h3>
+                    <p id="local-ativo" class="card-value">-</p>
+                </div>
+
+                <div class="card-relatorio">
+                    <div class="card-icon">📦</div>
+                    <h3>Resíduo Mais Frequente</h3>
+                    <p id="residuo-frequente" class="card-value">-</p>
+                </div>
+
+                <div class="card-relatorio">
+                    <div class="card-icon">📅</div>
+                    <h3>Média Diária (30 dias)</h3>
+                    <p id="media-diaria" class="card-value">-</p>
+                </div>
+
+                <div class="card-relatorio">
+                    <div class="card-icon">👥</div>
+                    <h3>Total de Usuários</h3>
+                    <p id="total-usuarios" class="card-value">-</p>
+                </div>
+
+                <div class="card-relatorio">
+                    <div class="card-icon">📍</div>
+                    <h3>Pontos de Descarte</h3>
+                    <p id="total-pontos" class="card-value">-</p>
+                </div>
+
+                <div class="card-relatorio">
+                    <div class="card-icon">📊</div>
+                    <h3>Variação Mensal</h3>
+                    <p id="variacao-mensal" class="card-value">-</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

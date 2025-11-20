@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consultar Histórico</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📊 Consultar Histórico de Descartes</h1>
+<a href="/" class="back-btn">← Voltar</a>        </header>
+
+        <div class="filtros-container">
+            <h3>Filtros</h3>
+            <form id="form-filtros">
+                <div class="filtros-row">
+                    <div class="form-group">
+                        <label for="filtroUsuario">Usuário</label>
+                        <input type="text" id="filtroUsuario" name="userName">
+                    </div>
+                    <div class="form-group">
+                        <label for="filtroResiduo">Tipo de Resíduo</label>
+                        <select id="filtroResiduo" name="wasteType">
+                            <option value="">Todos</option>
+                            <option value="plastic">Plástico</option>
+                            <option value="paper">Papel</option>
+                            <option value="organic">Orgânico</option>
+                            <option value="electronic">Eletrônico</option>
+                            <option value="glass">Vidro</option>
+                            <option value="metal">Metal</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="filtroPonto">Ponto de Descarte</label>
+                        <select id="filtroPonto" name="disposalPointId">
+                            <option value="">Todos</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="filtros-row">
+                    <div class="form-group">
+                        <label for="dataInicio">Data Início</label>
+                        <input type="date" id="dataInicio" name="startDate">
+                    </div>
+                    <div class="form-group">
+                        <label for="dataFim">Data Fim</label>
+                        <input type="date" id="dataFim" name="endDate">
+                    </div>
+                    <div class="form-group">
+                        <button type="button" id="btn-filtrar" class="btn-secondary">Aplicar Filtros</button>
+                        <button type="button" id="btn-limpar" class="btn-outline">Limpar</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <div class="resultados-container">
+            <h3>Resultados</h3>
+            <div id="loading" class="loading" style="display: none;">Carregando...</div>
+            <div id="resultados" class="tabela-container">
+                <table id="tabela-historico">
+                    <thead>
+                        <tr>
+                            <th>Data</th>
+                            <th>Usuário</th>
+                            <th>Tipo de Resíduo</th>
+                            <th>Local</th>
+                            <th>Bairro</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tbody-historico">
+                        <!-- Dados carregados via JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

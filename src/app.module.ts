@@ -10,7 +10,7 @@ import { DisposalRecord } from './entities/disposal-record.entity';
   imports: [
     TypeOrmModule.forRoot({
       type: 'sqlite',
-      database: 'waste-management.db',
+      database: 'database.sqlite',
       entities: [DisposalPoint, DisposalRecord],
       synchronize: true,
     }),
